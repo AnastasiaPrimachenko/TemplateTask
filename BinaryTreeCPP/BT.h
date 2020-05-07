@@ -17,7 +17,7 @@ public:
 		left = nullptr;
 		right = nullptr;
 		parent = nullptr;
-	}	
+	}
 	BT(T d) {
 		this->data = d;
 		this->level = 0;
@@ -26,7 +26,7 @@ public:
 		parent = nullptr;
 	}
 	void add_node(T d) { //adding nodes to the binary search tree
-		if (this->left == nullptr && this->data > d) { 		
+		if (this->left == nullptr && this->data > d) {
 			this->left = new BT(d);
 			this->left->level = this->level + 1;
 			this->left->parent = this;
@@ -36,7 +36,7 @@ public:
 			this->right->level = this->level + 1;
 			this->right->parent = this;
 		}
-		else {			
+		else {
 			if (this->data > d) this->left->add_node(d);
 			else if (this->data < d) this->right->add_node(d);
 		}
@@ -48,10 +48,13 @@ public:
 	}
 	BT& search(T n) { //searcing for the node with the specific value	
 		if (this->data == n) {
-			return *this; 
+			return *this;
 		}
-		if (this->data > n) this->left->search(n);
-		else if (this->data < n)this->right->search(n);		
+		if (this->data > n && this->left!=nullptr) this->left->search(n);
+		else if (this->data < n && this->right!=nullptr)this->right->search(n);
+		else {
+			cout << "This node does not exist" << endl;
+		}
 	}
 	void full_print() { //printing the full tree
 		string space = "";
@@ -76,30 +79,32 @@ public:
 	}
 	void delete_node(T data) { //deletes the node
 		BT* n = &(this->search(data));
-		BT* p = n->parent;
-		
-		if (n->left == nullptr && n->right == nullptr) { //deleting the leaf
-			if (p->left == n) p->left = nullptr;
-			else if (p->right == n) p->right = nullptr;
-		}
-		else if (n->left == nullptr || n->right == nullptr) { //when the element we want to delete has one child
-			if (n->left == nullptr)
-				if (p->left == n) p->left = n->right;
-				else p->right = n->right;
-			else
-				if (p->left == n) p->left = n->right;
-				else p->right = n->right;
-		}
-		else { //when the element we want to delete has two children
-			BT* s = n->right;
-			n->data = s->data;
-			if (s->parent->left == s) {
-				s->parent->left = s->right;
-				if (s->right != nullptr) s->right->parent = s->parent;
+		if (n->data != 258498796) {
+			BT* p = n->parent;
+
+			if (n->left == nullptr && n->right == nullptr) { //deleting the leaf
+				if (p->left == n) p->left = nullptr;
+				else if (p->right == n) p->right = nullptr;
 			}
-			else {
-				s->parent->right = s->left;
-				if (s->left != nullptr) s->right->parent = s->parent;
+			else if (n->left == nullptr || n->right == nullptr) { //when the element we want to delete has one child
+				if (n->left == nullptr)
+					if (p->left == n) p->left = n->right;
+					else p->right = n->right;
+				else
+					if (p->left == n) p->left = n->right;
+					else p->right = n->right;
+			}
+			else { //when the element we want to delete has two children
+				BT* s = n->right;
+				n->data = s->data;
+				if (s->parent->left == s) {
+					s->parent->left = s->right;
+					if (s->right != nullptr) s->right->parent = s->parent;
+				}
+				else {
+					s->parent->right = s->left;
+					if (s->left != nullptr) s->right->parent = s->parent;
+				}
 			}
 		}
 	}
@@ -118,5 +123,3 @@ public:
 		else return 0;
 	}
 };
-
-

@@ -20,13 +20,11 @@ int main()
 	cout << "Leaves :" << endl;
 	root.leaves_print();
 	cout << "Element search: " << endl;
-	BT <int> node = root.search(17);
-	cout << "Data: "<< node.get_data() << endl;
+	BT <int> node = root.search(15);
+	cout << "Data: " << node.get_data() << endl;
 	cout << "Parent: " << node.get_parent() << endl;
 	cout << "Left child: " << node.get_left() << endl;
 	cout << "Right child: " << node.get_right() << endl;
 	cout << "Traverse: " << endl;
 	root.traverse();
 }
-
-
