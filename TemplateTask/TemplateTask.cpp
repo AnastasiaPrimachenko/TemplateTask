@@ -3,7 +3,7 @@
 int main()
 {
     Queue <int> first(1, 10);
-    for (int i = 2; i <= 10; ++i) {
+    for (int i = 2; i <= 11; ++i) {
         first.push(i);
     }
     cout << "When trying to add more than allowed: ";

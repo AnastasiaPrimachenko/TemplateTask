@@ -84,10 +84,10 @@ public:
 		}
 		else if (n->left == nullptr || n->right == nullptr) { //when the element we want to delete has one child
 			if (n->left == nullptr)
-				if (p->left == n) p->left == n->right;
+				if (p->left == n) p->left = n->right;
 				else p->right = n->right;
 			else
-				if (p->left == n) p->left == n->right;
+				if (p->left == n) p->left = n->right;
 				else p->right = n->right;
 		}
 		else { //when the element we want to delete has two children
